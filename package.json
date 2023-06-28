@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --fix",
     "prepare": "husky install",
-    "test": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --watch",
     "test:staged": "jest --passWithNoTests"
   },
   "keywords": [],
