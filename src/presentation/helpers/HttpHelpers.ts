@@ -1,3 +1,4 @@
+import { ServerError } from '../errors/ServerError'
 import { type HttpResponse } from '../protocols/Http'
 
 export class HttpHelpers {
@@ -5,6 +6,13 @@ export class HttpHelpers {
     return {
       statusCode: 400,
       body: error
+    }
+  }
+
+  static serverError(): HttpResponse {
+    return {
+      statusCode: 500,
+      body: new ServerError()
     }
   }
 }
