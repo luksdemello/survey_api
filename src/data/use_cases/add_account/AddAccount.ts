@@ -14,8 +14,9 @@ export class AddAccountUseCase implements AddAccount {
   async execute(accountData: AddAccountModel): Promise<AccountModel> {
     const hashedPassword = await this.encrypter.encrypt(accountData.password)
     await this.encrypter.encrypt(accountData.password)
-    await this.addAccountRepository.create(Object.assign({}, accountData, { password: hashedPassword }))
+    const account = await this.addAccountRepository.create(Object.assign({},
+      accountData, { password: hashedPassword }))
 
-    return { ...accountData, id: '' }
+    return account
   }
 }
