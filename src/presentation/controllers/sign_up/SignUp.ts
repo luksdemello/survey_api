@@ -41,10 +41,7 @@ export class SignUpController implements Controller {
         password
       })
 
-      return {
-        statusCode: 200,
-        body: account
-      }
+      return HttpHelpers.success(account)
     } catch (error) {
       return HttpHelpers.serverError()
     }
