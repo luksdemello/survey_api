@@ -1,4 +1,4 @@
-import { type Encrypter } from '../../protocols/Encrypter'
+import { type Encrypter } from './AddAccountProtocols'
 import { AddAccountUseCase } from './AddAccount'
 
 interface SutTypes {
