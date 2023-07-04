@@ -4,12 +4,14 @@ import { type AddAccountModel } from '../../../domain/use_cases/AddAccount'
 import { MongoHelper } from '../../db/mongodb/mongodb'
 
 export class AccountMongoRepository implements AddAccountRepository {
-  async create(account: AddAccountModel): Promise<AccountModel> {
+  async create(accountData: AddAccountModel): Promise<AccountModel> {
     const accountCollection = MongoHelper.getCollection('accounts')
-    const result = await accountCollection.insertOne(account)
+    const result = await accountCollection.insertOne(Object.assign({}, accountData))
     const accountModel: AccountModel = {
-      ...account,
-      id: result.insertedId.id.toString()
+      email: accountData.email,
+      name: accountData.name,
+      password: accountData.password,
+      id: result.insertedId.toHexString()
     }
 
     return accountModel
