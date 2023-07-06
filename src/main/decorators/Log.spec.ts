@@ -5,7 +5,7 @@ import { LogControllerDecorator } from './Log'
 
 const makeLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
-    async log(stackError: string): Promise<void> {
+    async logError(stackError: string): Promise<void> {
     }
   }
 
@@ -83,7 +83,7 @@ describe('LogController Decorator', () => {
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise((resolve) => {
       resolve(error)
     }))
-    const logSpy = jest.spyOn(logErrorRepositoryStub, 'log')
+    const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
     await sut.handle(makefakeRequest())
     expect(logSpy).toHaveBeenCalledWith('any_stack')
   })
