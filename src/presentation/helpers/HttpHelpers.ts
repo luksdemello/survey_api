@@ -9,10 +9,10 @@ export class HttpHelpers {
     }
   }
 
-  static serverError(): HttpResponse {
+  static serverError(error: Error): HttpResponse {
     return {
       statusCode: 500,
-      body: new ServerError()
+      body: new ServerError(error.stack ?? '')
     }
   }
 
