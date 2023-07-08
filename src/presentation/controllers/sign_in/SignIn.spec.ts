@@ -1,7 +1,12 @@
-import { type Authentication, type AuthenticationModel } from '../../../domain/use_cases/Authentication'
+import {
+  type Authentication,
+  type AuthenticationModel,
+  type EmailValidator,
+  type HttpRequest
+} from './SignInProtocols'
 import { InvalidParamError, MissingParamError, ServerError } from '../../errors'
 import { HttpHelpers } from '../../helpers/HttpHelpers'
-import { type HttpRequest, type EmailValidator } from '../sign_up/SignUpProtocols'
+
 import { SignInController } from './SignIn'
 
 const makeAuthenticationStub = (): Authentication => {
