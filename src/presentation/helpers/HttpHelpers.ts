@@ -1,4 +1,5 @@
 import { ServerError } from '../errors/ServerError'
+import { UnauthorizedError } from '../errors/UnauthorizedError'
 import { type HttpResponse } from '../protocols/Http'
 
 export class HttpHelpers {
@@ -13,6 +14,13 @@ export class HttpHelpers {
     return {
       statusCode: 500,
       body: new ServerError(error.stack ?? '')
+    }
+  }
+
+  static unauthorized(): HttpResponse {
+    return {
+      statusCode: 401,
+      body: new UnauthorizedError()
     }
   }
 

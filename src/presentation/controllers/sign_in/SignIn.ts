@@ -27,7 +27,10 @@ export class SignInController implements Controller {
         return HttpHelpers.badRequest(new InvalidParamError('email'))
       }
 
-      await this.authentication.execute({ email, password })
+      const accessToken = await this.authentication.execute({ email, password })
+      if (!accessToken) {
+        return HttpHelpers.unauthorized()
+      }
 
       return {
         body: '',
