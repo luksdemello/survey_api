@@ -4,7 +4,7 @@ import { type Controller, type HttpRequest, type HttpResponse } from '../../prot
 
 export class SignInController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const requiredFields = ['email']
+    const requiredFields = ['email', 'password']
 
     for (const field of requiredFields) {
       if (!httpRequest.body[field]) {
