@@ -6,7 +6,7 @@ import { SignInController } from './SignIn'
 
 const makeAuthenticationStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async execute(authenticationModel: AuthenticationModel): Promise<string> {
+    async execute(authenticationModel: AuthenticationModel): Promise<string | null> {
       return 'any_token'
     }
   }
@@ -112,5 +112,12 @@ describe('SignIn Controller', () => {
     jest.spyOn(authenticationStub, 'execute').mockImplementationOnce(() => { throw new Error('') })
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(HttpHelpers.serverError(new Error('')))
+  })
+
+  it('should return 401 if invalid credentials are provided', async () => {
+    const { sut, authenticationStub } = makeSut()
+    jest.spyOn(authenticationStub, 'execute').mockReturnValueOnce(new Promise((resolve) => { resolve(null) }))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(HttpHelpers.unauthorized())
   })
 })
