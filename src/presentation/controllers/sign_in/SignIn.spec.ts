@@ -6,8 +6,8 @@ import { SignInController } from './SignIn'
 
 const makeAuthenticationStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async execute(authenticationModel: AuthenticationModel): Promise<void> {
-
+    async execute(authenticationModel: AuthenticationModel): Promise<string> {
+      return 'any_token'
     }
   }
 
@@ -105,5 +105,12 @@ describe('SignIn Controller', () => {
       email: 'any_email@mail.com',
       password: 'any_password'
     })
+  })
+
+  it('should return 500 if Authentication throws', async () => {
+    const { sut, authenticationStub } = makeSut()
+    jest.spyOn(authenticationStub, 'execute').mockImplementationOnce(() => { throw new Error('') })
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(HttpHelpers.serverError(new Error('')))
   })
 })
