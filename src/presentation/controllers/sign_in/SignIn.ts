@@ -36,10 +36,7 @@ export class SignInController implements Controller {
         return HttpHelpers.unauthorized()
       }
 
-      return {
-        body: '',
-        statusCode: 400
-      }
+      return HttpHelpers.success({ accessToken })
     } catch (error) {
       return HttpHelpers.serverError(error)
     }
