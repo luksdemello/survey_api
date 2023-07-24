@@ -1,6 +1,6 @@
-import { ServerError } from '../errors/ServerError'
-import { UnauthorizedError } from '../errors/UnauthorizedError'
-import { type HttpResponse } from '../protocols/Http'
+import { ServerError } from '../../errors/ServerError'
+import { UnauthorizedError } from '../../errors/UnauthorizedError'
+import { type HttpResponse } from '../../protocols/Http'
 
 export class HttpHelpers {
   static badRequest(error: Error): HttpResponse {

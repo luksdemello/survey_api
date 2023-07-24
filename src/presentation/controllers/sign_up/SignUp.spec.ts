@@ -8,7 +8,7 @@ import {
   type Validation
 } from './SignUpProtocols'
 import { SignUpController } from './SignUp'
-import { HttpHelpers } from '../../helpers/HttpHelpers'
+import { HttpHelpers } from '../../helpers/http/HttpHelpers'
 
 const makeFakeRequest = (): HttpRequest => (
   {

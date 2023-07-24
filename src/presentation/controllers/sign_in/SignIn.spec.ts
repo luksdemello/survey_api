@@ -5,7 +5,7 @@ import {
   type HttpRequest
 } from './SignInProtocols'
 import { MissingParamError } from '../../errors'
-import { HttpHelpers } from '../../helpers/HttpHelpers'
+import { HttpHelpers } from '../../helpers/http/HttpHelpers'
 
 import { SignInController } from './SignIn'
 

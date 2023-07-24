@@ -5,7 +5,7 @@ import {
   type HttpRequest,
   type HttpResponse
 } from './SignInProtocols'
-import { HttpHelpers } from '../../helpers/HttpHelpers'
+import { HttpHelpers } from '../../helpers/http/HttpHelpers'
 
 export class SignInController implements Controller {
   constructor(
