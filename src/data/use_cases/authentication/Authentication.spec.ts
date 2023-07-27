@@ -163,4 +163,13 @@ describe('Authentication UseCase', () => {
     await sut.execute(makeFakeAuthentication())
     expect(updateSpy).toHaveBeenCalledWith(makeFakeAccount().id, 'any_token')
   })
+
+  it('should throw if UpdateAccessTokenRepository throws', async () => {
+    const { sut, updateAccessTokenStub } = makeSut()
+    jest.spyOn(updateAccessTokenStub, 'update').mockReturnValueOnce(new Promise((resolve, reject) => {
+      reject(new Error())
+    }))
+    const promise = sut.execute(makeFakeAuthentication())
+    await expect(promise).rejects.toThrow()
+  })
 })
