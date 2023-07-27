@@ -69,7 +69,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('AddAccount UseCase', () => {
+describe('Authentication UseCase', () => {
   it('should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailStub } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByEmailStub, 'load')
@@ -121,5 +121,14 @@ describe('AddAccount UseCase', () => {
     const generateSpy = jest.spyOn(tokenGeneratorStub, 'generate')
     await sut.execute(makeFakeAuthentication())
     expect(generateSpy).toHaveBeenCalledWith(makeFakeAccount().id)
+  })
+
+  it('should throw if TokenGenerator throws', async () => {
+    const { sut, tokenGeneratorStub } = makeSut()
+    jest.spyOn(tokenGeneratorStub, 'generate').mockReturnValueOnce(new Promise((resolve, reject) => {
+      reject(new Error())
+    }))
+    const promise = sut.execute(makeFakeAuthentication())
+    await expect(promise).rejects.toThrow()
   })
 })
