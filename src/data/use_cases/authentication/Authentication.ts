@@ -1,8 +1,11 @@
-import { type Authentication, type AuthenticationModel } from '../../../domain/use_cases/Authentication'
-import { type HashCompare } from '../../protocols/criptography/HashCompare'
+import {
+  type LoadAccountByEmailRepository,
+  type HashCompare,
+  type UpdateAccessTokenRepository,
+  type Authentication,
+  type AuthenticationModel
+} from './AuthenticationProtocols'
 import { type TokenGenerator } from '../../protocols/criptography/TokenGenerator'
-import { type LoadAccountByEmailRepository } from '../../protocols/db/LoadAccountByEmailRepository'
-import { type UpdateAccessTokenRepository } from '../../protocols/db/UpdateAccessTokenRepository'
 
 export class AuthenticationUseCase implements Authentication {
   constructor(
