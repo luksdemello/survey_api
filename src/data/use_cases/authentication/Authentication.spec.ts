@@ -48,4 +48,13 @@ describe('AddAccount UseCase', () => {
     await sut.execute(makeFakeAuthentication())
     expect(loadSpy).toHaveBeenCalledWith(makeFakeAuthentication().email)
   })
+
+  it('should throw if LoadAccountByEmailRepository throws', async () => {
+    const { sut, loadAccountByEmailStub } = makeSut()
+    jest.spyOn(loadAccountByEmailStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => {
+      reject(new Error())
+    }))
+    const promise = sut.execute(makeFakeAuthentication())
+    await expect(promise).rejects.toThrow()
+  })
 })
