@@ -85,4 +85,13 @@ describe('AddAccount UseCase', () => {
     await sut.execute(makeFakeAuthentication())
     expect(compareSpy).toHaveBeenCalledWith(makeFakeAuthentication().password, makeFakeAccount().password)
   })
+
+  it('should throw if HashCompare throws', async () => {
+    const { sut, hashCompareStub } = makeSut()
+    jest.spyOn(hashCompareStub, 'compare').mockReturnValueOnce(new Promise((resolve, reject) => {
+      reject(new Error())
+    }))
+    const promise = sut.execute(makeFakeAuthentication())
+    await expect(promise).rejects.toThrow()
+  })
 })
