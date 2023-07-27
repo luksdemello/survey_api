@@ -1,6 +1,6 @@
 
 import { AuthenticationUseCase } from './Authentication'
-import { type LoadAccountByEmailRepository } from '../../protocols/LoadAccountByEmailRepository'
+import { type LoadAccountByEmailRepository } from '../../protocols/db/LoadAccountByEmailRepository'
 import { type AccountModel } from '../../../domain/models/Account'
 import { type AuthenticationModel } from '../../../domain/use_cases/Authentication'
 
