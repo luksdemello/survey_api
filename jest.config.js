@@ -24,7 +24,7 @@ module.exports = {
     "<rootDir>/src/**/*.ts",
     "!<rootDir>/src/main/**",
     "!<rootDir>/src/**/*Protocols.ts",
-    "!<rootDir>/src/**/protocols/*",
+    "!<rootDir>/src/**/protocols/**",
     "!<rootDir>/src/domain/**"
   ],
 

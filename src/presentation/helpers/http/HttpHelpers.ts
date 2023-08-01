@@ -13,7 +13,7 @@ export class HttpHelpers {
   static serverError(error: Error): HttpResponse {
     return {
       statusCode: 500,
-      body: new ServerError(error.stack ?? '')
+      body: new ServerError(error.stack!)
     }
   }
 
