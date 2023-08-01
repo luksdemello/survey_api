@@ -53,5 +53,16 @@ describe('Authentication Routes', () => {
 
       expect(result.status).toBe(200)
     })
+
+    it('should return 200 on signin', async () => {
+      const result = await supertest(app)
+        .post('/api/signin')
+        .send({
+          email: 'jhonDoe@email.com',
+          password: '123456'
+        })
+
+      expect(result.status).toBe(401)
+    })
   })
 })
