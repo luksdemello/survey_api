@@ -5,13 +5,13 @@ import {
   type Authentication,
   type AuthenticationModel
 } from './AuthenticationProtocols'
-import { type TokenGenerator } from '../../protocols/criptography/TokenGenerator'
+import { type Encrypter } from '../../protocols/criptography/Encrypter'
 
 export class AuthenticationUseCase implements Authentication {
   constructor(
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
     private readonly hashCompare: HashCompare,
-    private readonly tokenGenerator: TokenGenerator,
+    private readonly encrypter: Encrypter,
     private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
   ) {}
 
@@ -27,7 +27,7 @@ export class AuthenticationUseCase implements Authentication {
       return null
     }
 
-    const accessToken = await this.tokenGenerator.generate(account.id)
+    const accessToken = await this.encrypter.encrypt(account.id)
 
     await this.updateAccessTokenRepository.update(account.id, accessToken)
 
