@@ -16,7 +16,7 @@ export class AuthenticationUseCase implements Authentication {
   ) {}
 
   async execute(authenticationModel: AuthenticationModel): Promise<string | null> {
-    const account = await this.loadAccountByEmailRepository.load(authenticationModel.email)
+    const account = await this.loadAccountByEmailRepository.loadByEmail(authenticationModel.email)
 
     if (!account) {
       return null
