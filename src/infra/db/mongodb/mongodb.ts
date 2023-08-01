@@ -27,4 +27,13 @@ export class MongoHelper {
     }
     return this.client!.db().collection(name)
   }
+
+  static map<T>(data: any): T | null {
+    if (!data) return null
+
+    return {
+      ...data,
+      id: data._id.toString()
+    }
+  }
 }

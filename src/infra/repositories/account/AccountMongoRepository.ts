@@ -1,9 +1,10 @@
 import { type AddAccountRepository } from '../../../data/protocols/db/AddAccountRepository'
+import { type LoadAccountByEmailRepository } from '../../../data/protocols/db/LoadAccountByEmailRepository'
 import { type AccountModel } from '../../../domain/models/Account'
 import { type AddAccountModel } from '../../../domain/use_cases/AddAccount'
 import { MongoHelper } from '../../db/mongodb/mongodb'
 
-export class AccountMongoRepository implements AddAccountRepository {
+export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository {
   async create(accountData: AddAccountModel): Promise<AccountModel> {
     const accountCollection = await MongoHelper.getCollection('accounts')
     const result = await accountCollection.insertOne(Object.assign({}, accountData))
@@ -15,5 +16,12 @@ export class AccountMongoRepository implements AddAccountRepository {
     }
 
     return accountModel
+  }
+
+  async loadByEmail(email: string): Promise<AccountModel | null> {
+    const accountCollection = await MongoHelper.getCollection('accounts')
+    const account = await accountCollection.findOne({ email })
+
+    return MongoHelper.map<AccountModel>(account)
   }
 }
