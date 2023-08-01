@@ -6,8 +6,8 @@ import {
   type AccountModel,
   type HttpRequest,
   type Validation
-} from './SignUpProtocols'
-import { SignUpController } from './SignUp'
+} from './SignUpControllerProtocols'
+import { SignUpController } from './SignUpController'
 import { HttpHelpers } from '../../helpers/http/HttpHelpers'
 
 const makeFakeRequest = (): HttpRequest => (

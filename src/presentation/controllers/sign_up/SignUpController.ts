@@ -4,7 +4,7 @@ import {
   type Controller,
   type HttpRequest,
   type HttpResponse
-} from './SignUpProtocols'
+} from './SignUpControllerProtocols'
 import { HttpHelpers } from '../../helpers/http/HttpHelpers'
 
 export class SignUpController implements Controller {

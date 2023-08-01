@@ -3,11 +3,11 @@ import {
   type Authentication,
   type AuthenticationModel,
   type HttpRequest
-} from './SignInProtocols'
+} from './SignInControllerProtocols'
 import { MissingParamError } from '../../errors'
 import { HttpHelpers } from '../../helpers/http/HttpHelpers'
 
-import { SignInController } from './SignIn'
+import { SignInController } from './SignInController'
 
 const makeAuthenticationStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
